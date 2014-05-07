@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class='row'>
+  <div class='col-md-4'>
+    <div class='btn-toolbar'>
+      <div class="btn-group" id='day_buttons'>
+      </div>
+      <div class='btn-group'>
+        <button type="button" class="btn btn-default" id='add_day_button'>+ Add Day</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class='col-md-8'>
+    <div class='places_select_box'>
+      <h3>Hotels</h3>
+      <select class="form-control places_select" id="hotel_select">
+        {% for i,hotel in hotels %}
+          <option value="hotel_{{i}}">{{hotel.name}}</option>  
+        {% endfor %}
+      </select>
+      <button class='btn btn-primary' id='hotel_add_button'>Add</button>
+    </div>
+    <div class='places_select_box'>
+      <h3>Things to do</h3>
+      <select class="form-control places_select" id="thingtodo_select">
+        {% for i,thingtodo in thingtodos %}
+          <option value="thingtodo_{{i}}">{{thingtodo.name}}</option>  
+        {% endfor %}
+      </select>
+      <button class='btn btn-primary' id='thingtodo_add_button'>Add</button>
+    </div>
+    <div class='places_select_box'>
+      <h3>Restaurants</h3>
+      <select class="form-control places_select" id="restaurant_select">
+        {% for x,restaurant in restaurants %}
+          <option value="restaurant_{{x}}">{{restaurant.name}}</option>  
+        {% endfor %}
+      </select>
+      <button class='btn btn-primary' id='restaurant_add_button'>Add</button>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-3'>
+  <h3>Plan</h3>
+  <div>
+    <ul>
+    <li>
+      <h4>Hotel</h4>
+      <ul id='hotel_list'>
+      </ul>
+    </li>
+    <li>
+      <h4>Things to Do</h4>
+      <ul id='thingtodo_list'>
+      </ul>
+    </li>
+    <li>
+      <h4>Restaurants</h4>
+      <ul id='restaurant_list'>
+      </ul>
+    </li>
+  </div>
+  </div>
+
+  <div class='col-md-9'>
+    <div id="map-canvas"></div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block bottomscripts %}
+    <script>    
+      {% autoescape false %}
+      var all_hotels = {{ hotels | json }};
+      var all_restaurants = {{ restaurants | json }};
+      var all_thingtodos = {{ thingtodos | json }};
+      {% endautoescape %}
+    </script>
+    
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC2ZiQbJ_sKaL80Iq6JU4WD4SVlFBsJ5c&sensor=true"></script>
+      
+    <script>
+      $(function() {
+        initialize_gmaps();
+        initEvents();
+      });
+    </script>
+    
+{% endblock %}

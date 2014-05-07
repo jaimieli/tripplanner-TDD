@@ -1,0 +1,30 @@
+
+html { height: 100% }
+body { height: 100%; padding-top: 70px;}
+
+#map-canvas { height: 400px; margin-top: 20px; }
+/*.cleardiv {clear:both;}*/
+
+.places_select_box {
+  width: 31%;
+  float:left;
+  margin-right: 3%;
+  
+  &:last-child {
+    margin-right: 0;
+  }
+  
+  h3 {
+    margin-top: 0;
+  }
+  
+  select {
+    width: 70%;
+    display: inline-block;
+  }
+  
+  button {
+    display: inline-block;
+    width: 25%;
+  }
+}
