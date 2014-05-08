@@ -15,6 +15,31 @@ var used_markers = [];
 //   restaurants: []
 // }]
 
+var markerPool = {
+  pool: [],
+  get: function(lat, lon, title) {
+    var usedMarker = this.pool.pop();
+    var markerToReturn;
+    if (typeof usedMarker != "undefined") {
+      markerToReturn = this.repurpose(usedMarker, lat, lon, title);
+    } else {
+      var myLatLng = new google.maps.LatLng(lat,lon);
+      var marker = new google.maps.Marker({position: myLatLng, title: title});
+      markerToReturn = marker;
+    }
+    return markerToReturn;
+  },
+  repurpose: function (usedMarker, lat, lon, title) {
+    var newLatLng = new google.maps.LatLng(lat,lon);
+    usedMarker.setPosition(newLatLng);
+    if (typeof title === "undefined") {
+      title = "";
+    }
+    usedMarker.setTitle(title);
+    return usedMarker;
+  }
+};
+
 var clearView = function() {
   // clearing the list
   var i = item_types.length;
@@ -23,10 +48,11 @@ var clearView = function() {
   }
   
   // clear map-markers
-  var i = used_markers.length;
-  while (i--) {
-    used_markers[i].setMap(null);
-    // add marker to markerPool (talk about this later)
+  var marker;
+  while (used_markers.length) {
+    marker = used_markers.pop();
+    markerPool.pool.push(marker);
+    marker.setMap(null);
   }
 };
 
@@ -96,8 +122,9 @@ var c = function(x) {
 var addMarker = function (type, item) {
   var lat = item.place[0].location[0];
   var lon = item.place[0].location[1];
-  var myLatLng = new google.maps.LatLng(lat,lon);
-  var newmarker = new google.maps.Marker({position: myLatLng, title: item.name});
+  // var myLatLng = new google.maps.LatLng(lat,lon);
+  // var newmarker = new google.maps.Marker({position: myLatLng, title: item.name});
+  var newmarker = markerPool.get(lat, lon, item.name);
   newmarker.setMap(map);
   used_markers.push(newmarker);
 };
