@@ -6,3 +6,15 @@ describe('Karma runner setup', function () {
         done();
     });
 });
+
+describe('Trip Array', function () {
+  it('should start as an empty array', function (done) {
+    expect(trip).to.eql([]);
+    done();
+  });
+  it('should have a day object after addNewDay', function(done) {
+    addNewDay();
+    expect(trip.length).to.equal(1);
+    done();
+  });
+});
