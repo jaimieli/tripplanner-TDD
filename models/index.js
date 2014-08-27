@@ -1,8 +1,12 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/tripplanner');
+var mongoose = require('mongoose')
+    , config = require('../config')
+    , connectionString = config.get('mongo:url');
+
+mongoose.connect(connectionString);
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
- 
+
 var Schema = mongoose.Schema;
 
 var placeSchema = new Schema({

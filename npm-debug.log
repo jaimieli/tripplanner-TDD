@@ -1,0 +1,21 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'test',
+1 verbose cli   '/test/backend/hotelAddition.js' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 verbose node symlink /usr/bin/node
+5 error Error: ENOENT, open '/test/backend/hotelAddition.js/package.json'
+6 error If you need help, you may report this *entire* log,
+6 error including the npm and node versions, at:
+6 error     <http://github.com/npm/npm/issues>
+7 error System Darwin 13.3.0
+8 error command "node" "/usr/bin/npm" "test" "/test/backend/hotelAddition.js"
+9 error cwd /Users/jaimieli/Fullstack/tripplanner-review-fsa11
+10 error node -v v0.10.30
+11 error npm -v 1.4.21
+12 error path /test/backend/hotelAddition.js/package.json
+13 error code ENOENT
+14 error errno 34
+15 verbose exit [ 34, true ]
