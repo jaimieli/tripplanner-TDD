@@ -19,7 +19,13 @@
   },
   "devDependencies": {
     "chai": "^1.9.1",
+    "karma": "^0.12.22",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-mocha": "^0.1.9",
+    "karma-sinon": "^1.0.3",
     "mocha": "^1.21.4",
+    "sinon": "^1.10.3",
     "supertest": "^0.13.0"
   }
 }
